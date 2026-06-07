@@ -1,0 +1,15 @@
+[
+  {
+    "id": "clean-arch-layout",
+    "title": "Directory layout and old file cleanups align with Go clean architecture guidelines",
+    "type": "script",
+    "scriptPath": "verify.js",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  }
+]

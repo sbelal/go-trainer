@@ -1,0 +1,15 @@
+[
+  {
+    "id": "concurrency-checks",
+    "title": "InMemoryTodoStore functions are thread-safe and pass race detector tests under concurrent access",
+    "type": "script",
+    "scriptPath": "verify.js",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  }
+]

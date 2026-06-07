@@ -141,3 +141,19 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Go binaries and files
+*.exe
+*.test
+*.prof
+/app/cmd/todo-api/todo-api
+/app/cmd/todo-api/todo-api.exe
+
+# SQLite Databases
+*.db
+*.sqlite
+*.sqlite3
+/app/todos.db
+/app/test_todos.db
+/app/e2e_todos.db
+

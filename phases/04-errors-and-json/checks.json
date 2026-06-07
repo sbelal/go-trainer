@@ -1,0 +1,28 @@
+[
+  {
+    "id": "json-go-exists",
+    "title": "json.go exists in app directory",
+    "type": "command",
+    "command": "node -e \"if (!require('fs').existsSync('app/json.go')) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 3: Implement JSON Serialization Helpers"
+    }
+  },
+  {
+    "id": "json-unit-tests",
+    "title": "Unit tests verifying Todo JSON tags, validation errors, and serialization helpers pass successfully",
+    "type": "script",
+    "scriptPath": "verify.js",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  }
+]

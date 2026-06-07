@@ -1,0 +1,82 @@
+[
+  {
+    "id": "go-installed",
+    "title": "Go is installed",
+    "type": "command",
+    "command": "go version",
+    "expect": {
+      "exitCode": 0,
+      "outputContains": "go version"
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Prerequisites"
+    }
+  },
+  {
+    "id": "app-dir-exists",
+    "title": "Directory 'app/' exists in workspace root",
+    "type": "command",
+    "command": "node -e \"if (!require('fs').existsSync('app') || !require('fs').statSync('app').isDirectory()) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 1: Create the App Directory and Initialize the Module"
+    }
+  },
+  {
+    "id": "go-mod-exists",
+    "title": "go.mod exists in app directory",
+    "type": "command",
+    "command": "node -e \"if (!require('fs').existsSync('app/go.mod')) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 1: Create the App Directory and Initialize the Module"
+    }
+  },
+  {
+    "id": "go-mod-content",
+    "title": "go.mod initializes module 'todo-api'",
+    "type": "command",
+    "command": "node -e \"const f = require('fs').readFileSync('app/go.mod', 'utf8'); if (!f.includes('module todo-api')) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 1: Create the App Directory and Initialize the Module"
+    }
+  },
+  {
+    "id": "main-go-exists",
+    "title": "main.go exists in app directory",
+    "type": "command",
+    "command": "node -e \"if (!require('fs').existsSync('app/main.go')) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 2: Create main.go"
+    }
+  },
+  {
+    "id": "hello-world-run",
+    "title": "main.go compiles and prints 'Hello, World!'",
+    "type": "command",
+    "command": "go run app/main.go",
+    "expect": {
+      "exitCode": 0,
+      "outputMatches": "Hello, World!"
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 2: Create main.go"
+    }
+  }
+]

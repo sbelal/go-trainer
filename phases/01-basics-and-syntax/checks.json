@@ -1,0 +1,28 @@
+[
+  {
+    "id": "basics-go-exists",
+    "title": "basics.go exists in app directory",
+    "type": "command",
+    "command": "node -e \"if (!require('fs').existsSync('app/basics.go')) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  },
+  {
+    "id": "basics-unit-tests",
+    "title": "Unit tests for AppName, FormatTodo, IsPriorityHigh, and CalculateCompletionRate pass successfully",
+    "type": "script",
+    "scriptPath": "verify.js",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  }
+]

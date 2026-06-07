@@ -1,0 +1,28 @@
+[
+  {
+    "id": "middleware-exists",
+    "title": "middleware.go exists in app/internal/handler",
+    "type": "command",
+    "command": "node -e \"if (!require('fs').existsSync('app/internal/handler/middleware.go')) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 1: Write the Middlewares"
+    }
+  },
+  {
+    "id": "middleware-tests",
+    "title": "Request logging and API key auth header middlewares execute and enforce restrictions correctly",
+    "type": "script",
+    "scriptPath": "verify.js",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  }
+]

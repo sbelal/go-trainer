@@ -1,0 +1,28 @@
+[
+  {
+    "id": "sqlite-store-exists",
+    "title": "sqlite_store.go exists in app directory",
+    "type": "command",
+    "command": "node -e \"if (!require('fs').existsSync('app/sqlite_store.go')) process.exit(1)\"",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Step 2: Implement the SqliteTodoStore"
+    }
+  },
+  {
+    "id": "sqlite-unit-tests",
+    "title": "Unit tests verifying SqliteTodoStore DDL initialization, database CRUD persistence, and validation rules pass successfully",
+    "type": "script",
+    "scriptPath": "verify.js",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "context-tests",
+    "title": "TodoStore methods and SQL operations accept context, compile correctly, and return errors on cancellation",
+    "type": "script",
+    "scriptPath": "verify.js",
+    "expect": {
+      "exitCode": 0
+    },
+    "fix": {
+      "file": "README.md",
+      "section": "Hands-On Exercise"
+    }
+  }
+]
