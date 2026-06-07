@@ -46,15 +46,12 @@ code .
 ```
 
 ### 2. Verify Your Environment
-Run the verifier on Phase 0 to ensure your Go and Node installations are ready:
+Before starting, ensure Go and Node.js are correctly installed on your system by running:
 ```bash
-# Using node directly
-node verify-phase.js 0
-
-# Or via npm
-npm run verify -- 0
+go version
+node --version
 ```
-If you see all green checks (✅), you are ready to start!
+If both commands return their respective versions, you are ready to start! Head over to Phase 0 to set up your project workspace.
 
 ---
 
