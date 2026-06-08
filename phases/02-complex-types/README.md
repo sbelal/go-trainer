@@ -91,6 +91,37 @@ for _, name := range names {
 }
 ```
 
+#### Early Loop Termination (`break` & `return`)
+When searching for a specific item in a slice, you should terminate the loop once the item is found to avoid unnecessary iterations:
+* **`break`**: Exits the loop immediately and continues executing code after the loop block.
+* **`return`**: Exits the entire function immediately (and returns a value if the function has a return type).
+
+Here is an example searching for a value:
+```go
+// Using return to exit the function immediately when found
+func HasItem(items []string, target string) bool {
+    for _, item := range items {
+        if item == target {
+            return true // Item found, exit function immediately
+        }
+    }
+    return false // Loop finished without finding the item
+}
+
+// Using break to exit the loop but continue inside the function
+func FindItemIndex(items []string, target string) int {
+    foundIndex := -1
+    for i, item := range items {
+        if item == target {
+            foundIndex = i
+            break // Exit the loop early
+        }
+    }
+    // Execution continues here after break
+    return foundIndex
+}
+```
+
 > [!WARNING]
 > **Modifying Structs in a Loop (Copy-by-Value Pitfall):**
 > When you iterate over a slice of structs (e.g., `[]Todo`) using `for _, todo := range Todos`, the `todo` variable is a **copy** of the element in the slice.
