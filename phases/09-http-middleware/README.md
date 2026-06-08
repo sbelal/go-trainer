@@ -39,6 +39,44 @@ Middleware functions intercept and process requests before they reach the final 
   mux.Handle("POST /todos", Auth(http.HandlerFunc(postHandler)))
   ```
 
+### 3. Measuring Duration and Reading Request Headers
+
+#### Timing Operations
+To measure how long an operation takes, Go provides the `"time"` package:
+* `time.Now()` returns the current local time.
+* `time.Since(startTime)` returns the elapsed time since `startTime` as a duration.
+
+#### Logging
+In Go, you use the standard `"log"` package to output timestamped logging information to the console:
+```go
+import (
+    "log"
+    "time"
+)
+
+func ProcessRequest() {
+    start := time.Now()
+    
+    // ... do some work ...
+    
+    duration := time.Since(start)
+    log.Printf("Process took %s", duration)
+}
+```
+
+#### Reading Request Headers
+To retrieve HTTP headers sent by the client, use the `Header` field of the `*http.Request` object and call its `.Get("Header-Name")` method. Note that Go normalizes header keys, but it is idiomatic to use standard capitalization:
+```go
+func HandleAuth(w http.ResponseWriter, r *http.Request) {
+    // Retrieves value of the header "X-API-Key"
+    apiKey := r.Header.Get("X-API-Key")
+    
+    if apiKey == "" {
+        log.Println("X-API-Key header is missing!")
+    }
+}
+```
+
 ---
 
 ## Hands-On Exercise

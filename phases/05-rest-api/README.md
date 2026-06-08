@@ -32,7 +32,8 @@ If you are used to Express (Node.js) or Flask/FastAPI (Python), Go's standard li
   ```go
   mux.HandleFunc("DELETE /todos/{id}", func(w http.ResponseWriter, r *http.Request) {
       idStr := r.PathValue("id")
-      id, err := strconv.Atoi(idStr) // Parse string to int
+      // strconv.Atoi parses a string into an integer. You must import the "strconv" package.
+      id, err := strconv.Atoi(idStr) 
       // ...
   })
   ```
