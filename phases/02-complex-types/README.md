@@ -52,6 +52,37 @@ Maps associate keys with values.
   delete(m, "key")
   ```
 
+### 5. Iterating over Slices and Maps (`for range`)
+To loop through a slice or map, Go uses the `for range` construct. This returns both the **index** and the **value** (or key and value for maps).
+
+```go
+names := []string{"Alice", "Bob", "Charlie"}
+
+// Loop with index and value
+for index, name := range names {
+    fmt.Printf("Index: %d, Value: %s\n", index, name)
+}
+
+// If you don't need the index, use the blank identifier (_)
+for _, name := range names {
+    fmt.Println(name)
+}
+```
+
+> [!WARNING]
+> **Modifying Structs in a Loop (Copy-by-Value Pitfall):**
+> When you iterate over a slice of structs (e.g., `[]Todo`) using `for _, todo := range Todos`, the `todo` variable is a **copy** of the element in the slice.
+> Modifying `todo.Completed = true` inside the loop will **not** modify the actual element in the `Todos` slice!
+> To modify the element in the slice, you must access it using its index:
+> ```go
+> for i, todo := range Todos {
+>     if todo.ID == targetID {
+>         // Access the slice element directly by index to modify it
+>         Todos[i].Completed = !Todos[i].Completed
+>     }
+> }
+> ```
+
 ---
 
 ## Hands-On Exercise

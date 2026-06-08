@@ -40,11 +40,18 @@ If you are used to Express (Node.js) or Flask/FastAPI (Python), Go's standard li
 ### 3. Parsing Request Bodies and Writing JSON Responses
 In Go, reading request bodies requires decoding the raw byte stream from `r.Body`. Go's `json.NewDecoder` is highly optimized for this.
 
-- **Writing JSON:** Set the `Content-Type` header, set the status code, and encode the struct:
+- **Writing JSON:** Set the `Content-Type` header, set the status code, and encode the struct/data:
   ```go
+  // Writing a success response (e.g., 200 OK)
   w.Header().Set("Content-Type", "application/json")
   w.WriteHeader(http.StatusOK)
   json.NewEncoder(w).Encode(data)
+
+  // Writing an error response (e.g., 400 Bad Request)
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(http.StatusBadRequest)
+  // We can use a map to quickly build a JSON object like {"error": "message"}
+  json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
   ```
 - **Reading JSON:** Decode `r.Body` directly into a struct:
   ```go

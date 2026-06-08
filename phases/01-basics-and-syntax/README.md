@@ -54,8 +54,81 @@ In Go, variables always have a default **Zero Value** if not explicitly initiali
 - Pointers, slices, maps, channels, interfaces $\rightarrow$ `nil`
 
 ### 4. Control Flow: If & For
-- **`if` statements:** Do not require parentheses `()` around the condition, but curly braces `{}` are **always** mandatory.
-- **`for` loops:** The `for` loop is Go's **only** loop construct. There is no `while` or `do-while` loop in Go! You represent a `while` loop simply using `for <condition>`.
+
+#### `if` statements
+In Go, `if` statements do not require parentheses `()` around the condition, but curly braces `{}` are **always** mandatory for the code blocks, even if there is only a single statement.
+
+```go
+// Example of if-else structure
+priority := 7
+
+if priority >= 5 {
+    // executes if condition is true
+    fmt.Println("High priority")
+} else if priority >= 3 {
+    // executes if condition is false but this else-if is true
+    fmt.Println("Medium priority")
+} else {
+    // executes if all conditions are false
+    fmt.Println("Low priority")
+}
+```
+
+#### `for` loops
+The `for` loop is Go's **only** loop construct. There is no `while` or `do-while` loop in Go! You can represent a standard C-style three-component loop, or a while-style conditional loop:
+
+```go
+// Standard three-component for loop: init; condition; post
+for i := 0; i < 5; i++ {
+    fmt.Println(i)
+}
+
+// "While" loop style: condition only
+count := 0
+for count < 3 {
+    fmt.Println(count)
+    count++
+}
+```
+
+### 5. Functions and String Formatting
+
+#### Functions and Return Values
+In Go, functions are declared with the `func` keyword. You must specify the types of all parameters and the return type(s) explicitly.
+
+Here is an example function that takes two numbers, adds them, and returns the result:
+```go
+// func Name(parameterName parameterType) returnType
+func AddNumbers(a int, b int) int {
+    sum := a + b
+    return sum // Uses the return keyword to send a value back
+}
+```
+
+If a function does not return anything, you simply omit the return type:
+```go
+func SayHello(name string) {
+    fmt.Println("Hello, " + name)
+}
+```
+
+#### String Formatting with `fmt.Sprintf`
+To construct formatted strings, Go provides the `fmt.Sprintf` function (part of the standard `"fmt"` package). It works similarly to template literals in JS or f-strings in Python, but uses verb specifiers (like `%s` for strings, `%d` for integers, `%f` or `%v` for general values).
+
+Unlike `fmt.Printf` (which prints directly to the console), `fmt.Sprintf` returns the formatted string so you can use it in variables or return values.
+
+To use functions from the `"fmt"` package, you must import it at the top of your file:
+```go
+package main
+
+import "fmt" // Import the fmt package
+
+func FormatGreeting(name string, age int) string {
+    // %s is for string, %d is for integer
+    message := fmt.Sprintf("Hello %s, you are %d years old.", name, age)
+    return message
+}
+```
 
 ---
 

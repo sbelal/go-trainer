@@ -30,6 +30,22 @@ func (c *Counter) IncrementPointer() {
 }
 ```
 
+#### Initializing and Returning Struct Pointers
+To create a struct and get a pointer to it, use the `&` (address-of) operator on a struct literal:
+
+```go
+type User struct {
+    Name string
+}
+
+// Returns a pointer to a User (*User)
+func NewUser(name string) *User {
+    return &User{
+        Name: name,
+    }
+}
+```
+
 ### 2. Interfaces (Implicit Duck Typing)
 In many languages (like Java or TypeScript), a class must explicitly state that it implements an interface (e.g. `class MyStore implements TodoStore`).
 

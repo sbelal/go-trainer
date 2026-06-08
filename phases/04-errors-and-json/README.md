@@ -28,7 +28,37 @@ In this phase, you will master two fundamental topics in Go back-end development
   ```
   This forces developers to deal with failures at the point of origin, leading to much more robust and predictable code.
 
-### 2. Struct Tags & JSON Mapping
+### 2. Returning Multiple Values and Creating Errors
+Go functions can return multiple values. This is commonly used to return a result alongside an error.
+
+To return an error, you import the `"errors"` package and use `errors.New("message")`. If a function completes successfully, you return `nil` for the error.
+
+```go
+import "errors"
+
+// Returns two values: a string and an error
+func Divide(a, b float64) (float64, error) {
+    if b == 0 {
+        // Return zero value for the result, and a new error
+        return 0, errors.New("cannot divide by zero")
+    }
+    // Return the result and nil (no error)
+    return a / b, nil
+}
+```
+
+To call this function and handle the error:
+```go
+result, err := Divide(10, 0)
+if err != nil {
+    // Handle error
+    fmt.Println("Error:", err)
+    return
+}
+fmt.Println("Result:", result)
+```
+
+### 3. Struct Tags & JSON Mapping
 By default, Go fields must start with an uppercase letter to be "exported" (publicly visible outside the package). Since standard JSON APIs use lowercase/camelCase (e.g., `title`, `id`), Go uses **Struct Tags** in backticks to map Go fields to JSON keys.
 
 ```go

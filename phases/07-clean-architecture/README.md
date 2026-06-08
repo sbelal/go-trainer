@@ -35,6 +35,20 @@ To avoid circular imports, Go developers:
 - Make implementation packages (e.g. `internal/sqlite`) import the domain package, not the other way around.
 - Let the entrypoint (`cmd/`) instantiate the database implementation and inject it into the handlers (Dependency Injection).
 
+### 4. Reading Environment Variables and Setting Defaults
+In JS, you check environment variables using `process.env.PORT || '8080'`. In Python, you might use `os.environ.get('PORT', '8080')`.
+
+In Go, the `os.Getenv` function returns the value of an environment variable as a string. If the environment variable is not set, `os.Getenv` returns an **empty string (`""`)**. There is no direct default-argument support, so you must explicitly check for the empty string:
+
+```go
+import "os"
+
+port := os.Getenv("PORT")
+if port == "" {
+    port = "8080" // Apply default value if unset
+}
+```
+
 ---
 
 ## Hands-On Exercise

@@ -46,6 +46,51 @@ db, err := sql.Open("sqlite", "todos.db")
   }
   ```
 
+### 4. Handling Query Results & DB Errors
+
+#### Checking for "No Rows Found" (`sql.ErrNoRows`)
+When `db.QueryRow().Scan()` does not find any matching rows, it returns a special error: `sql.ErrNoRows`. You should import `"database/sql"` and check for this error specifically:
+
+```go
+import "database/sql"
+
+var name string
+err := db.QueryRow("SELECT name FROM users WHERE id = ?", id).Scan(&name)
+if err == sql.ErrNoRows {
+    // Handle the case where no matching user was found
+    fmt.Println("User not found")
+} else if err != nil {
+    // Handle other database errors
+    fmt.Println("Database error:", err)
+}
+```
+
+#### Getting Last Insert ID and Rows Affected
+Methods like `db.Exec()` return an `sql.Result` object. You can call `.LastInsertId()` (to get the ID of an autoincremented key after an INSERT) or `.RowsAffected()` (to check how many rows were updated/deleted):
+
+```go
+result, err := db.Exec("INSERT INTO tasks (title) VALUES (?)", "Buy Milk")
+if err != nil {
+    return err
+}
+
+// Get the autoincremented ID of the inserted row
+newID, err := result.LastInsertId()
+if err != nil {
+    return err
+}
+fmt.Printf("Inserted task with ID %d\n", newID)
+
+// Get rows affected (useful for UPDATE/DELETE checks)
+updateResult, err := db.Exec("UPDATE tasks SET done = 1 WHERE id = ?", 999)
+// ... handle err
+rowsAffected, err := updateResult.RowsAffected()
+if rowsAffected == 0 {
+    // No rows were updated (perhaps ID 999 doesn't exist)
+    fmt.Println("No task was updated")
+}
+```
+
 ---
 
 ## Hands-On Exercise
