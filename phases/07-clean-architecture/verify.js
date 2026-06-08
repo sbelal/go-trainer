@@ -47,7 +47,7 @@ try {
   fs.copyFileSync(testFileSource, testFileDest);
 
   // 4. Run tests
-  execSync('go test -v ./app/...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..') });
+  execSync('go test -v ./...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..', 'app') });
 } catch (err) {
   process.exit(1);
 } finally {

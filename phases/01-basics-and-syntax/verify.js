@@ -17,7 +17,7 @@ try {
   fs.copyFileSync(testFileSource, testFileDest);
 
   // Run tests
-  execSync('go test -v ./app/...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..') });
+  execSync('go test -v ./...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..', 'app') });
 } catch (err) {
   // If exit status is non-zero, it means tests failed
   process.exit(1);

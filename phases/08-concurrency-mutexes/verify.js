@@ -18,7 +18,7 @@ try {
 
   // Run tests with the race detector!
   console.log('  Running go test with -race flag...');
-  execSync('go test -race -v ./app/internal/todo/...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..') });
+  execSync('go test -race -v ./internal/todo/...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..', 'app') });
 } catch (err) {
   process.exit(1);
 } finally {

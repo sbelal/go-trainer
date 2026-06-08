@@ -12,7 +12,7 @@ try {
 
   // Run tests in the handler folder
   console.log('  Running user-written unit tests in app/internal/handler...');
-  execSync('go test -v ./app/internal/handler/...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..') });
+  execSync('go test -v ./internal/handler/...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..', 'app') });
 } catch (err) {
   process.exit(1);
 }

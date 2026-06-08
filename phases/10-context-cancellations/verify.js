@@ -17,7 +17,7 @@ try {
   fs.copyFileSync(testFileSource, testFileDest);
 
   // Run tests across the entire codebase to assert signature refactors compile
-  execSync('go test -v ./app/...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..') });
+  execSync('go test -v ./...', { stdio: 'inherit', cwd: path.join(__dirname, '..', '..', 'app') });
 } catch (err) {
   process.exit(1);
 } finally {
