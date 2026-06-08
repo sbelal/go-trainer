@@ -130,6 +130,14 @@ func FormatGreeting(name string, age int) string {
 }
 ```
 
+### 6. Go Packages and `package main`
+In Go, code is organized into **packages**. A package is a collection of source files in the same directory that are compiled together.
+
+Here are the key rules for Go packages:
+1. **One Folder, One Package:** All Go source files in a single directory **must** declare that they belong to the same package at the very top of the file using the `package` keyword (e.g., `package main`).
+2. **The `main` Package:** The package name `main` is a special name in Go. It tells the Go compiler that this code should be compiled as an **executable program** (which produces a runnable binary) rather than a shared library. An executable program must have a `func main()` function in one of its files to serve as the application's entry point.
+3. **Sharing Code in the `/app` folder:** Because all files in the `app/` directory reside in the same folder, they **must** all declare `package main` at the top. This allows them to automatically share variables, functions, and structs declared across different files in that directory without needing to write `import` statements! For example, your `main.go` file can call the functions you implement inside `basics.go` directly.
+
 ---
 
 ## Hands-On Exercise
