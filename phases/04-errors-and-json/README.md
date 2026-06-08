@@ -69,6 +69,49 @@ type Todo struct {
 }
 ```
 
+#### JSON Serialization and Deserialization (`json.Marshal` & `json.Unmarshal`)
+To work with JSON payloads, Go provides the `"encoding/json"` standard library package.
+
+* **`json.Marshal` (Serialization):** Converts a Go value (like a struct or slice of structs) into a JSON byte slice (`[]byte`).
+* **`json.Unmarshal` (Deserialization):** Parses JSON data in a byte slice (`[]byte`) and writes the result into a Go variable. **Crucial:** You must pass a pointer (using `&`) to the variable so that `json.Unmarshal` can modify it directly.
+
+Here is an example demonstrating both:
+```go
+package main
+
+import (
+    "encoding/json" // Note: import path is "encoding/json", but we use prefix `json` in code
+    "fmt"
+)
+
+type User struct {
+    Name string `json:"name"`
+    Age  int    `json:"age"`
+}
+
+func ExampleJSON() {
+    u := User{Name: "Alice", Age: 30}
+
+    // 1. Serialize (Marshal)
+    jsonData, err := json.Marshal(u)
+    if err != nil {
+        fmt.Println("Error serializing:", err)
+        return
+    }
+    fmt.Println(string(jsonData)) // Output: {"name":"Alice","age":30}
+
+    // 2. Deserialize (Unmarshal)
+    var parsedUser User
+    // We pass &parsedUser (a pointer) so json.Unmarshal can write data into it
+    err = json.Unmarshal(jsonData, &parsedUser)
+    if err != nil {
+        fmt.Println("Error deserializing:", err)
+        return
+    }
+    fmt.Printf("Parsed: %+v\n", parsedUser)
+}
+```
+
 ---
 
 ## Hands-On Exercise
