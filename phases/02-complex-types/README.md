@@ -19,6 +19,28 @@ type Todo struct {
 }
 ```
 
+#### Initializing Struct Variables
+To use a struct, you can instantiate and initialize it in a few different ways:
+
+1. **Inline Initialization (Struct Literals):**
+   You specify the field names and their values inside curly braces `{}`. This is the most common way to initialize a struct with values.
+   ```go
+   todo := Todo{
+       ID:        1,
+       Title:     "Buy Milk",
+       Completed: false,
+   }
+   ```
+
+2. **Declaration and Field Assignment:**
+   You declare the variable using `var` (which automatically initializes fields to their zero values) and then assign values to the fields individually using the dot (`.`) operator.
+   ```go
+   var todo Todo
+   todo.ID = 1
+   todo.Title = "Buy Milk"
+   todo.Completed = false
+   ```
+
 ### 2. Slices (Dynamic Arrays)
 Go has **Arrays** (fixed size, immutable length) and **Slices** (dynamically-sized views into arrays). In practice, you will use **Slices** 99% of the time.
 
