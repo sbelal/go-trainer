@@ -6,7 +6,54 @@ In this phase, you will learn two of Go's most important architectural features:
 
 ## Conceptual Overview: Go vs. JavaScript & Python
 
-### 1. Pointers (Value vs. Reference Semantics)
+### 1. Where are the Classes? (Building Services the Go Way)
+In JS and Python, if you want to build a service that maintains state (like a todo store), you would define a **Class**:
+
+```javascript
+// JavaScript / TypeScript Class
+class InMemoryTodoStore {
+    constructor() {
+        this.todos = [];
+        this.nextID = 1;
+    }
+
+    add(title) {
+        const todo = { id: this.nextID++, title, completed: false };
+        this.todos.push(todo);
+        return todo;
+    }
+}
+```
+
+In Go, **there are no classes, inheritance, or class constructors.** Instead, Go separates **Data** (using structs) from **Behavior** (using receiver methods) and ties them together:
+
+```go
+// Go Way: 1. Define the Data Schema (Struct)
+type InMemoryTodoStore struct {
+    todos  []Todo
+    nextID int
+}
+
+// Go Way: 2. Define the Constructor Function
+func NewInMemoryTodoStore() *InMemoryTodoStore {
+    return &InMemoryTodoStore{
+        todos:  []Todo{},
+        nextID: 1,
+    }
+}
+
+// Go Way: 3. Define the Behavior (Receiver Method)
+// (s *InMemoryTodoStore) binds this function to the struct as a method
+func (s *InMemoryTodoStore) Add(title string) Todo {
+    todo := Todo{ID: s.nextID, Title: title, Completed: false}
+    s.todos = append(s.todos, todo)
+    s.nextID++
+    return todo
+}
+```
+This separation ensures that data structures remain lightweight and easily serializable, while behavior can be composed and decoupled using interfaces.
+
+### 2. Pointers (Value vs. Reference Semantics)
 - **JS/Python:** Objects and lists are passed by reference. If you pass an object/dictionary to a function and mutate its fields, the changes affect the caller's object.
 - **Go:** Everything is **passed by value** (copied). If you pass a struct to a method or function, Go copies the entire struct. Changes made inside the function are lost when it returns!
 
@@ -46,7 +93,7 @@ func NewUser(name string) *User {
 }
 ```
 
-### 2. Interfaces (Implicit Duck Typing)
+### 3. Interfaces (Implicit Duck Typing)
 In many languages (like Java or TypeScript), a class must explicitly state that it implements an interface (e.g. `class MyStore implements TodoStore`).
 
 Go has **implicit interfaces**. If a struct implements all the methods defined in an interface, Go automatically considers it to implement that interface. There is no `implements` keyword!

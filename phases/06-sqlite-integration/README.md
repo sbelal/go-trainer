@@ -27,7 +27,19 @@ db, err := sql.Open("sqlite", "todos.db")
 ```
 > 💡 `sql.Open` does **not** actually establish a connection to the database. It merely sets up the connection pool manager. To verify the connection, you must call `db.Ping()`.
 
-### 3. Executing Statements and Scanning Rows
+### 3. No ORMs: Raw SQL and Explicit Scanning (The Go Way)
+In JS (Node.js) or Python, you are likely used to Object-Relational Mappers (ORMs) like Prisma, TypeORM, SQLAlchemy, or Django ORM:
+```javascript
+// JS ORM style (automatic struct mapping)
+const todos = await prisma.todo.findMany();
+```
+In Go, while ORMs exist, the community heavily prefers using **raw SQL** with the standard library `database/sql` package.
+
+Instead of magic methods that convert tables to objects automatically, the Go compiler requires you to explicitly query columns and **scan** those values into the address of your struct fields.
+* **Why this is preferred:** It prevents hidden SQL query generation, ensures maximum performance, and makes it clear exactly which columns are retrieved and mapped.
+* **How it works:** You run a query, and then map each row column-by-column using `.Scan(&struct.Field1, &struct.Field2)` in the exact order specified in your SELECT statement.
+
+### 4. Executing Statements and Scanning Rows
 - **`db.Exec`**: Used for queries that modify data (DDL creation, INSERT, UPDATE, DELETE). It returns an `sql.Result` with info like `LastInsertId()` and `RowsAffected()`.
 - **`db.QueryRow`**: Used for queries expected to return at most one row. You scan directly from it:
   ```go
@@ -46,7 +58,7 @@ db, err := sql.Open("sqlite", "todos.db")
   }
   ```
 
-### 4. Handling Query Results & DB Errors
+### 5. Handling Query Results & DB Errors
 
 #### Checking for "No Rows Found" (`sql.ErrNoRows`)
 When `db.QueryRow().Scan()` does not find any matching rows, it returns a special error: `sql.ErrNoRows`. You should import `"database/sql"` and check for this error specifically:
